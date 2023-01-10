@@ -5,7 +5,7 @@ Criação de um CRUD baseado em funcionários publicos com tempo limite de 10m
 # Objetivo
 
 Criar uma aplicação CRUD funcional que cotenha essa rotas
-POST, GET, PATCH/PUT, DELETE e suas respectivas validações
+POST, GET, PATCH, DELETE e suas respectivas validações
 
 # Tabelas
 
@@ -13,7 +13,7 @@ POST, GET, PATCH/PUT, DELETE e suas respectivas validações
 
 * id - primary key - uuid
 * name - string
-* email - url - unique
+* email - email - unique
 * age - integer
 * salary - float
 
@@ -24,7 +24,7 @@ POST, GET, PATCH/PUT, DELETE e suas respectivas validações
 
 Criar um funcionário baseado nos dados da tabela respectiva
 
-> Caso o funcionário tenha o mesmo email, retorne um bad request
+> Caso o funcionário tenha um email já cadastrado, retorne um erro
 ---
 
 ### GET /employees
