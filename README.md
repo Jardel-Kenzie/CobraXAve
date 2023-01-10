@@ -33,7 +33,14 @@ Retornar todos os funcionários
 
 ---
 
-### PATCH/PUT /employees/:employeId
+### GET /employees/:employeId
+
+Retornar o funcionário pelo id
+
+> Validar se o funcionário passada por id existe. Caso não exista retorne um not found
+---
+
+### PATCH /employees/:employeId
 
 Será possível modificar apenas o name, salary e age do funcionário passado por id
 
@@ -45,4 +52,4 @@ Será possível modificar apenas o name, salary e age do funcionário passado po
 
 Remover o funcionário do banco de dados.
 
-> Validar se o funcionário passada por id existe. Caso não exista retorne um not found
+> Validar se o funcionário passado por id existe. Caso não exista retorne um not found
