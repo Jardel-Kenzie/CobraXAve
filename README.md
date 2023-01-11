@@ -33,7 +33,7 @@ POST, GET, PATCH, DELETE e suas respectivas validações
 
 Criar um animal baseado nos dados da tabela respectiva
 
-> Caso alguma informação esteja incorreta ou faltante retorne um bad request - statusCode: 400
+> Caso alguma informação esteja incorr  eta ou faltante retorne um bad request - statusCode: 400
 
 ```
     Expected
@@ -70,12 +70,20 @@ Obs: O zoológico pode ser criado sem animais
 ```
 ---
 
-### POST /zoo/animalId
+### POST /zoo/add
 
 Adicione um animal ao zoológico
-* Not body
+
+```
+body: {
+    animalId: 1,
+    zooId: 1
+} 
+```
 
 > Caso não encontre o animal, retorne um not found - statusCode: 404
+
+> Caso não encontre o zoológico, retorne um not found - statusCode: 404
 
 > Caso o animal já esteja no zoológico retorne um conflict - statusCode: 409
 
