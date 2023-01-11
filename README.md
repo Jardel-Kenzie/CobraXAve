@@ -60,12 +60,9 @@ Obs: O zoológico pode ser criado sem animais
     Expected
     statuCode: 201
     Response: {
-        "id": 1,
-	    "scientific_name": "Panthera tigris",
-	    "surname": "Rajado",
-	    "species": "felina",
-	    "weight": 88.58,
-	    "age": 12
+	    "name": "kenzieAnimal",
+	    "city": "curitiba",
+	    "capacity": 2
     }
 ```
 ---
