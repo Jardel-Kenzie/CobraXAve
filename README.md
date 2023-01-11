@@ -1,55 +1,151 @@
 # CobraXAve
 
-Criação de um CRUD baseado em funcionários publicos com tempo limite de 10m
+Criação de um CRUD baseado em animais do zoológico com tempo limite de 20m
 
 # Objetivo
 
-Criar uma aplicação CRUD funcional que cotenha essa rotas
+Criar uma aplicação CRUD funcional que contenha essa rotas
 POST, GET, PATCH, DELETE e suas respectivas validações
 
 # Tabelas
 
-### employees
+### animal
 
-* id - primary key - uuid
-* name - string
-* email - email - unique
-* age - integer
-* salary - float
+* id - PK - bigserial
+* scientific_name - string - not null
+* surname - string - not null
+* species - string - not null
+* weight - float - not null
+* age - integer- not null
+
+### zoo
+
+* id - PK - bigserial
+* name - string - not null
+* city - string - not null
+* capacity - integer - not null
+* animals - integer - FK 
+
+> Crie uma tabela pivot para relacionar os animais ao seus zoologicos, lembrando que cada animal só pertence a um zoologico, mas cada zoologico pode ter vários animais
 
 # Rotas
 
+### POST /animals
 
-### POST /employees
+Criar um animal baseado nos dados da tabela respectiva
 
-Criar um funcionário baseado nos dados da tabela respectiva
+> Caso alguma informação esteja incorreta ou faltante retorne um bad request - statusCode: 400
 
-> Caso o funcionário tenha um email já cadastrado, retorne um erro
+```
+    Expected
+    statuCode: 201
+    Response: {
+        "id": 1,
+	    "scientific_name": "Panthera tigris",
+	    "surname": "Rajado",
+	    "species": "felina",
+	    "weight": 88.58,
+	    "age": 12
+    }
+```
+---
+### POST /zoo
+
+Criar um zoológico baseado nos dados da tabela respectiva
+
+Obs: O zoológico pode ser criado sem animais 
+
+> Caso alguma informação esteja incorreta ou faltante retorne um bad request - statusCode: 400
+
+```
+    Expected
+    statuCode: 201
+    Response: {
+        "id": 1,
+	    "scientific_name": "Panthera tigris",
+	    "surname": "Rajado",
+	    "species": "felina",
+	    "weight": 88.58,
+	    "age": 12
+    }
+```
 ---
 
-### GET /employees
+### POST /zoo/animalId
 
-Retornar todos os funcionários
+Adicione um animal ao zoológico
+* Not body
 
----
+> Caso não encontre o animal, retorne um not found - statusCode: 404
 
-### GET /employees/:employeId
+> Caso o animal já esteja no zoológico retorne um conflict - statusCode: 409
 
-Retornar o funcionário pelo id
+> Caso o zoológico esteja lotado, retorne um not acceptable - statusCode: 406
 
-> Validar se o funcionário passada por id existe. Caso não exista retorne um not found
----
 
-### PATCH /employees/:employeId
+```
+    Expected
+    statuCode: 201
+    Response: "animal adicionado"
+```
 
-Será possível modificar apenas o name, salary e age do funcionário passado por id
+### GET /zoo
 
-> Validar se o funcionário passada por id existe. Caso não exista retorne um not found
+Retorne todos os zoológicos relacionados com os animais
 
-> Proibir entrada de valores diferentes da pedida
----
-### DELETE /employees/:employeId
+```
+    Expected
+    statuCode: 200
+    Response: [
+    {
+        "id": 1,
+        "name": "kenzieAnimal",
+        "city": "curitiba",
+        "capacity": 2,
+        "animals": [
+            {
+                "id": 1,
+	            "scientific_name": "Panthera tigris",
+	            "surname": "Rajado",
+	            "species": "felina",
+	            "weight": 88.58,
+	            "age": 13
+            }
+        ]
+    }
+    ...
+    ]
+```
 
-Remover o funcionário do banco de dados.
+### PATCH /animals/animalId
 
-> Validar se o funcionário passado por id existe. Caso não exista retorne um not found
+Modificar informações de algum animal baseado no id passado na url
+
+> Caso não encontre o animal, retorne um not found - statusCode: 404
+
+> Caso alguma informação esteja incorreta retorne um bad request - statusCode: 400
+
+```
+    Expected
+    statuCode: 200
+    Response: {
+        "id": 1,
+	    "scientific_name": "Panthera tigris",
+	    "surname": "Rajado",
+	    "species": "felina",
+	    "weight": 88.58,
+	    "age": 13
+    }
+```
+
+### DELETE /animals/animalId
+
+Remova o animal do banco, remoção deve ser em cascata, ou seja, remover também do zoológico que está. 
+
+> Caso não encontre o animal, retorne um not found - statusCode: 404
+
+```
+    Expected
+    statuCode: 204
+    Response: Not Content
+````
