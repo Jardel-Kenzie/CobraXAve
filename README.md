@@ -24,9 +24,8 @@ POST, GET, PATCH, DELETE e suas respectivas validações
 * name - string - not null
 * city - string - not null
 * capacity - integer - not null
-* animals - integer - FK 
 
-> Crie uma tabela pivot para relacionar os animais ao seus zoologicos, lembrando que cada animal só pertence a um zoologico, mas cada zoologico pode ter vários animais
+> Crie um relacionamento entre os animais e o zoológico, lembrando que cada animal só pertence a um zoologico, mas cada zoologico pode ter vários animais
 
 # Rotas
 
