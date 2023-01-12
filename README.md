@@ -1,156 +1,35 @@
-# CobraXAve
+# CobraXNinho
 
-Criação de um CRUD baseado em animais do zoológico com tempo limite de 20m
+Aplicação deve está completa e rodando na máquina local até segunda dia 16/01/2023 as 17h, onde encera o tempo limite.
 
-# Objetivo
+Você poderá utilizar de toda a sua criatividade e artimanhas para deixar a aplicação a mais completa possível. 
 
-Criar uma aplicação CRUD funcional que contenha essa rotas
-POST, GET, PATCH, DELETE e suas respectivas validações
+## Regras
 
-# Tabelas
+Nessa competição é permitido utilizar qualquer meio desde que possa ser vinculado com o **ts** ou **python**, onde serão avaliados os seguintes critérios:
 
-### animal
+* Arquitetura / Padrões de Projeto
+* Escalabilidade
+* Mantenabilidade
+* Segurança / Validações
+* Tempo de requisição / Otimização
 
-* id - PK - bigserial
-* scientific_name - string - not null
-* surname - string - not null
-* species - string - not null
-* weight - float - not null
-* age - integer- not null
+A Aplicação deve conseguir atender uma demanda de pelo menos **100 requisições simultâneas por segundo**, onde terá como recurso um banco que limita as conexões simultâneas em 20 com 4GB de server
 
-### zoo
+## Objetivo
 
-* id - PK - bigserial
-* name - string - not null
-* city - string - not null
-* capacity - integer - not null
+Criar uma aplicação completa baseado em um sistema de alta demanda, nesse caso iremos utilizar o contexto de um **Reprodutor de música online**. 
 
-> Crie um relacionamento entre os animais e o zoológico, lembrando que cada animal só pertence a um zoologico, mas cada zoologico pode ter vários animais
+Na qual dezenas de milhares de pessoas poderão está **requisitando** a mesma música simultaneamente, ou **adicionando** musicas novas a aplicação, ou **salvando** essa música em sua playlist pessoal, entre outros possíveis casos. Cabe a você ajudá-los com esse possível engarrafamento. 
 
-# Rotas
+## Tabelas
 
-### POST /animals
+* Precisaremos de uma tabela para armazenar as músicas.
+* Uma forma de separar e armazenas os usuários como **produtor da música** e **usuário comum** de acesso.
+* Além de ouvir, os usuários podem salvar como "favorito" aquela música.
 
-Criar um animal baseado nos dados da tabela respectiva
+> Caso precise de mais tabelas fique livre para criar a sua necessidade, além de pensar em como elas se relacionariam.
 
-> Caso alguma informação esteja incorr  eta ou faltante retorne um bad request - statusCode: 400
+## Conclusão
 
-```
-    Expected
-    statuCode: 201
-    Response: {
-        "id": 1,
-	    "scientific_name": "Panthera tigris",
-	    "surname": "Rajado",
-	    "species": "felina",
-	    "weight": 88.58,
-	    "age": 12
-    }
-```
----
-### POST /zoo
-
-Criar um zoológico baseado nos dados da tabela respectiva
-
-Obs: O zoológico pode ser criado sem animais 
-
-> Caso alguma informação esteja incorreta ou faltante retorne um bad request - statusCode: 400
-
-```
-    Expected
-    statuCode: 201
-    Response: {
-	    "name": "kenzieAnimal",
-	    "city": "curitiba",
-	    "capacity": 2
-    }
-```
----
-
-### POST /zoo/add
-
-Adicione um animal ao zoológico
-
-```
-body: {
-    animalId: 1,
-    zooId: 1
-} 
-```
-
-> Caso não encontre o animal, retorne um not found - statusCode: 404
-
-> Caso não encontre o zoológico, retorne um not found - statusCode: 404
-
-> Caso o animal já esteja no zoológico retorne um conflict - statusCode: 409
-
-> Caso o zoológico esteja lotado, retorne um not acceptable - statusCode: 406
-
-
-```
-    Expected
-    statuCode: 201
-    Response: "animal adicionado"
-```
-
-### GET /zoo
-
-Retorne todos os zoológicos relacionados com os animais
-
-```
-    Expected
-    statuCode: 200
-    Response: [
-    {
-        "id": 1,
-        "name": "kenzieAnimal",
-        "city": "curitiba",
-        "capacity": 2,
-        "animals": [
-            {
-                "id": 1,
-	            "scientific_name": "Panthera tigris",
-	            "surname": "Rajado",
-	            "species": "felina",
-	            "weight": 88.58,
-	            "age": 13
-            }
-            ...
-        ]
-    }
-    ...
-    ]
-```
-
-### PATCH /animals/animalId
-
-Modificar informações de algum animal baseado no id passado na url
-
-> Caso não encontre o animal, retorne um not found - statusCode: 404
-
-> Caso alguma informação esteja incorreta retorne um bad request - statusCode: 400
-
-```
-    Expected
-    statuCode: 200
-    Response: {
-        "id": 1,
-	    "scientific_name": "Panthera tigris",
-	    "surname": "Rajado",
-	    "species": "felina",
-	    "weight": 88.58,
-	    "age": 13
-    }
-```
-
-### DELETE /animals/animalId
-
-Remova o animal do banco, remoção deve ser em cascata, ou seja, remover também do zoológico que está. 
-
-> Caso não encontre o animal, retorne um not found - statusCode: 404
-
-```
-    Expected
-    statuCode: 204
-    Response: Not Content
-````
+O Importante não é ganhar ou perder, mas demostrar a beleza da programação e sua diversidade, que mesmo tendo um contexto igual, a experiência que cada um teve ao decorrer da programação, diversifica a aplicação. Mas que ambas consegue chegar em algo semelhante no fim.
